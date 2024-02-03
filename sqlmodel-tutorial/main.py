@@ -2,7 +2,7 @@ from typing import Optional
 
 from sqlmodel import Field, SQLModel, create_engine, Session,select
 
-DATA_BASE_URL="postgresql://saleemakhtar864:YUaiSR4gF5Bj@ep-bold-cell-01190632.us-east-2.aws.neon.tech/sql-tutorials?sslmode=require"
+DATA_BASE_URL=""
 
 
 
