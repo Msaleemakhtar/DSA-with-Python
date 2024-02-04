@@ -1,6 +1,14 @@
-from typing import Optional
+from typing import Optional, List
 
-from sqlmodel import Field, SQLModel, create_engine, Session,select
+from sqlmodel import Field, SQLModel, create_engine, Session,select, Relationship
+
+from dotenv import load_dotenv, find_dotenv
+from os import getenv
+
+
+
+
+load_dotenv(find_dotenv)
 
 
 
@@ -8,6 +16,7 @@ class Team(SQLModel, table= True):
     id:Optional[int] = Field(default=None, primary_key=True)
     name :str = Field(index=True)
     headdquarters : str
+    heroes:List["Hero"] = Relationship(back_populates="team")
 
 
 class Hero(SQLModel, table=True):
@@ -18,10 +27,12 @@ class Hero(SQLModel, table=True):
 
     team_id: Optional[int]= Field(default=None, foreign_key="team.id")
 
+    team:Optional[Team] = Relationship(back_populates="heroes")
 
 
 
-engine = create_engine(DATA_BASE_URL, echo=True)
+Postgess_url = getenv("DATA_BASE_URL")
+engine = create_engine(Postgess_url, echo=True)
 
 
 def create_db_and_tables():
